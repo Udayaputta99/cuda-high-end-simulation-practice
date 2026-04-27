@@ -9,7 +9,12 @@ void initStream(double *vec, size_t nx) {
     for (size_t i = 0; i < nx; ++i)
         vec[i] = (double) i;
 }
-
+void initStream(double *src, double *dest, size_t nx){
+    for (size_t i = 0; i < nx; ++i){
+    	src[i] = (double) i;
+	dest[i] = 0.0;
+    }
+}
 void checkSolutionStream(const double *const vec, size_t nx, size_t nIt) {
     for (size_t i = 0; i < nx; ++i)
         if ((double) (i + nIt) != vec[i]) {
@@ -19,3 +24,4 @@ void checkSolutionStream(const double *const vec, size_t nx, size_t nIt) {
 
     std::cout << "  Passed result check" << std::endl;
 }
+
