@@ -15,8 +15,10 @@ PARAMETERS = ${NX} ${NWARM} ${NIT}
 
 # all
 
-targets = $(BUILD_DIR)/$(TEST_CASE)-base $(BUILD_DIR)/$(TEST_CASE)-omp-host
-
+targets = $(BUILD_DIR)/$(TEST_CASE)-base \
+		  $(BUILD_DIR)/$(TEST_CASE)-omp-host\
+		  $(BUILD_DIR)/$(TEST_CASE)-cuda
+CUDA_ARCH = sm_86
 
 .PHONY: all
 all: mk-target-dir $(targets)
@@ -34,6 +36,8 @@ $(BUILD_DIR)/$(TEST_CASE)-base: $(TEST_CASE)-base.cpp $(TEST_CASE)-util.h ../uti
 $(BUILD_DIR)/$(TEST_CASE)-omp-host: $(TEST_CASE)-omp-host.cpp $(TEST_CASE)-util.h ../util.h
 	g++ -O3 -march=native -std=c++17 -fopenmp -o $(BUILD_DIR)/$(TEST_CASE)-omp-host $(TEST_CASE)-omp-host.cpp
 
+$(BUILD_DIR)/$(TEST_CASE)-cuda: $(TEST_CASE)-cuda.cu $(TEST_CASE)-util.h ../util.h
+	nvcc -O3 -std=c++17 -arch=$(CUDA_ARCH) -o $(BUILD_DIR)/$(TEST_CASE)-cuda $(TEST_CASE)-cuda.cu
 
 # aliases without build directory
 
@@ -43,7 +47,8 @@ $(TEST_CASE)-base: $(BUILD_DIR)/$(TEST_CASE)-base
 .PHONY: $(TEST_CASE)-omp-host
 $(TEST_CASE)-omp-host: $(BUILD_DIR)/$(TEST_CASE)-omp-host
 
-
+.PHONY: $(TEST_CASE)-cuda
+$(TEST_CASE)-cuda: $(BUILD_DIR)/$(TEST_CASE)-cuda
 # automated benchmark target
 
 .PHONY: bench
@@ -54,7 +59,8 @@ bench: all
 	@echo "OpenMP Host:"
 	$(BUILD_DIR)/$(TEST_CASE)-omp-host $(PARAMETERS)
 	@echo ""
-
+	@echo "CUDA:"
+	$(BUILD_DIR)/$(TEST_CASE)-cuda $(PARAMETERS)
 
 # clean target
 
