@@ -6,7 +6,8 @@ BUILD_DIR = ../../build/$(TEST_CASE)
 
 # default benchmark parameters
 
-NX    = 67108864
+#NX    = 67108864
+NX 	  = 256
 NWARM = 2
 NIT   = 10
 
