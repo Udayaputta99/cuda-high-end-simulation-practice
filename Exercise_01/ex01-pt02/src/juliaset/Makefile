@@ -10,12 +10,13 @@ NX    = 512
 NY    = 512
 
 PARAMETERS = ${NX} ${NY}
-
+CUDA_ARCH = sm_86
 
 # all
 
 targets = $(BUILD_DIR)/$(TEST_CASE)-greyscale-base \
-		  $(BUILD_DIR)/$(TEST_CASE)-rgb-base
+		  $(BUILD_DIR)/$(TEST_CASE)-rgb-base \
+		  $(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda
 
 
 .PHONY: all
@@ -36,6 +37,8 @@ $(BUILD_DIR)/$(TEST_CASE)-rgb-base: $(TEST_CASE)-rgb-base.cpp ../lodepng/lodepng
 	g++ -O3 -march=native -std=c++17 \
 	$(TEST_CASE)-rgb-base.cpp ../lodepng/lodepng.cpp \
 	-o $(BUILD_DIR)/$(TEST_CASE)-rgb-base
+$(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda: $(TEST_CASE)-greyscale-cuda.cu $(TEST_CASE)-util.h
+	nvcc -O3 -std=c++20 -arch=$(CUDA_ARCH) -o $(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda $(TEST_CASE)-greyscale-cuda.cu
 # aliases without build directory
 
 .PHONY: $(TEST_CASE)-greyscale-base
@@ -54,7 +57,8 @@ bench: all
 	@echo "RGB base:"
 	$(BUILD_DIR)/$(TEST_CASE)-rgb-base $(PARAMETERS)
 	@echo ""
-
+	@echo "Greyscale cuda:"
+	$(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda $(PARAMETERS)
 # clean target
 
 .PHONY: clean
