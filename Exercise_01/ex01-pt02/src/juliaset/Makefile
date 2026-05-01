@@ -33,12 +33,16 @@ $(BUILD_DIR)/$(TEST_CASE)-greyscale-base: $(TEST_CASE)-greyscale-base.cpp ../lod
 	g++ -O3 -march=native -std=c++17 \
 	$(TEST_CASE)-greyscale-base.cpp ../lodepng/lodepng.cpp \
 	-o $(BUILD_DIR)/$(TEST_CASE)-greyscale-base
+
 $(BUILD_DIR)/$(TEST_CASE)-rgb-base: $(TEST_CASE)-rgb-base.cpp ../lodepng/lodepng.h ../lodepng/lodepng.cpp
 	g++ -O3 -march=native -std=c++17 \
 	$(TEST_CASE)-rgb-base.cpp ../lodepng/lodepng.cpp \
 	-o $(BUILD_DIR)/$(TEST_CASE)-rgb-base
-$(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda: $(TEST_CASE)-greyscale-cuda.cu $(TEST_CASE)-util.h
-	nvcc -O3 -std=c++20 -arch=$(CUDA_ARCH) -o $(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda $(TEST_CASE)-greyscale-cuda.cu
+
+$(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda: $(TEST_CASE)-greyscale-cuda.cu ../lodepng/lodepng.h ../lodepng/lodepng.cpp
+	nvcc -O3 -std=c++20 -arch=$(CUDA_ARCH) \
+	$(TEST_CASE)-greyscale-cuda.cu ../lodepng/lodepng.cpp \
+	-o $(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda
 # aliases without build directory
 
 .PHONY: $(TEST_CASE)-greyscale-base
