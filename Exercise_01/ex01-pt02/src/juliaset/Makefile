@@ -6,17 +6,17 @@ BUILD_DIR = ../../build/$(TEST_CASE)
 
 # default benchmark parameters
 
-NX    = 512
-NY    = 512
+NX    = 6720
+NY    = 6720
+CR    = -0.8
+CI    = 0.2
 
-PARAMETERS = ${NX} ${NY}
-CUDA_ARCH = sm_86
+PARAMETERS = ${NX} ${NY} ${CR} ${CI}
+
 
 # all
 
-targets = $(BUILD_DIR)/$(TEST_CASE)-greyscale-base \
-		  $(BUILD_DIR)/$(TEST_CASE)-rgb-base \
-		  $(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda
+targets = $(BUILD_DIR)/$(TEST_CASE)-base $(BUILD_DIR)/$(TEST_CASE)-cuda
 
 
 .PHONY: all
@@ -29,36 +29,40 @@ mk-target-dir:
 
 # build rules
 
-$(BUILD_DIR)/$(TEST_CASE)-greyscale-base: $(TEST_CASE)-greyscale-base.cpp ../lodepng/lodepng.h ../lodepng/lodepng.cpp
+$(BUILD_DIR)/$(TEST_CASE)-base: $(TEST_CASE)-base.cpp ../lodepng/lodepng.h ../lodepng/lodepng.cpp ../CImg/CImg.h ../util.h
 	g++ -O3 -march=native -std=c++17 \
-	$(TEST_CASE)-greyscale-base.cpp ../lodepng/lodepng.cpp \
-	-o $(BUILD_DIR)/$(TEST_CASE)-greyscale-base
-$(BUILD_DIR)/$(TEST_CASE)-rgb-base: $(TEST_CASE)-rgb-base.cpp ../lodepng/lodepng.h ../lodepng/lodepng.cpp
-	g++ -O3 -march=native -std=c++17 \
-	$(TEST_CASE)-rgb-base.cpp ../lodepng/lodepng.cpp \
-	-o $(BUILD_DIR)/$(TEST_CASE)-rgb-base
-$(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda: $(TEST_CASE)-greyscale-cuda.cu $(TEST_CASE)-util.h
-	nvcc -O3 -std=c++20 -arch=$(CUDA_ARCH) -o $(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda $(TEST_CASE)-greyscale-cuda.cu
+	$(TEST_CASE)-base.cpp ../lodepng/lodepng.cpp \
+	-o $(BUILD_DIR)/$(TEST_CASE)-base -lz -lX11
+
+$(BUILD_DIR)/$(TEST_CASE)-cuda: $(TEST_CASE)-cuda.cu ../lodepng/lodepng.h ../lodepng/lodepng.cpp ../CImg/CImg.h ../util.h
+	nvcc -O3 -std=c++17 -arch=sm_86 \
+	$(TEST_CASE)-cuda.cu ../lodepng/lodepng.cpp \
+	-o $(BUILD_DIR)/$(TEST_CASE)-cuda -lz -lX11
+
 # aliases without build directory
 
-.PHONY: $(TEST_CASE)-greyscale-base
+.PHONY: $(TEST_CASE)-base
 $(TEST_CASE)-base: $(BUILD_DIR)/$(TEST_CASE)-base
 
-.PHONY: $(TEST_CASE)-rgb-base
-$(TEST_CASE)-base: $(BUILD_DIR)/$(TEST_CASE)-base
+.PHONY: $(TEST_CASE)-cuda
+$(TEST_CASE)-cuda: $(BUILD_DIR)/$(TEST_CASE)-cuda
 
 # automated benchmark target
 
 .PHONY: bench
 bench: all
-	@echo "Greyscale base:"
-	$(BUILD_DIR)/$(TEST_CASE)-greyscale-base $(PARAMETERS)
+	@echo "Base:"
+	$(BUILD_DIR)/$(TEST_CASE)-base $(PARAMETERS)
 	@echo ""
-	@echo "RGB base:"
-	$(BUILD_DIR)/$(TEST_CASE)-rgb-base $(PARAMETERS)
+	@echo "Cuda:"
+	$(BUILD_DIR)/$(TEST_CASE)-cuda $(PARAMETERS)
 	@echo ""
-	@echo "Greyscale cuda:"
-	$(BUILD_DIR)/$(TEST_CASE)-greyscale-cuda $(PARAMETERS)
+
+bench-%: all
+	@echo "Cuda:"
+	$(BUILD_DIR)/$(TEST_CASE)-$* $(PARAMETERS)
+	@echo ""
+
 # clean target
 
 .PHONY: clean
