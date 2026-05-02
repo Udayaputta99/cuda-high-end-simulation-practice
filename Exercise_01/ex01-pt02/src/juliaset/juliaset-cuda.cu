@@ -15,10 +15,19 @@ struct Parameters {
     size_t total_iter;
     int max;
     int min; 
-    cuDoubleComplex c;
+    double cr;
+    double ci;
     double dx;
     double dy;
 };
+
+#define checkCudaError(ans) check((ans),__FILE__,__LINE__)
+inline void check(cudaError_t err, const char *file, int line){
+    if (err != cudaSuccess){
+        std::cerr<<"CUDA Runtime error at: "<<file<<":"<<line<<std::endl;
+        std::cerr<<cudaGetErrorString(err)<<" "<<file<<std::endl;
+    }
+}
 
 __global__ void juliaset(Parameters param) {
     size_t i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -26,10 +35,12 @@ __global__ void juliaset(Parameters param) {
     if (i < param.nx && j < param.ny) {
         double real = param.min + i * param.dx;
         double imag = param.max - j * param.dy;
-        cuDoubleComplex p = make_cuDoubleComplex(real, imag);
+        double real_next;
         size_t iter{0};
-        while (cuCabs(p) < param.threshold && iter < param.total_iter) {
-            p = cuCadd(cuCmul(p, p), param.c);
+        while ((real*real + imag*imag) < (param.threshold*param.threshold) && iter < param.total_iter) {
+            real_next = real*real - imag*imag + param.cr;
+            imag = 2*real*imag + param.ci;
+            real = real_next;
             ++iter;
         }
 
@@ -46,8 +57,8 @@ int main(int argc, char *argv[]) {
     size_t size = sizeof(unsigned char) * nx * ny;
 
     unsigned char *dest, *d_dest;
-    cudaMallocHost(&dest, size);
-    cudaMalloc(&d_dest, size);
+    checkCudaError(cudaMallocHost(&dest, size));
+    checkCudaError(cudaMalloc(&d_dest, size));
 
     int max = 2;
     int min = -2;
@@ -61,7 +72,8 @@ int main(int argc, char *argv[]) {
         .total_iter = 128,
         .max = max,
         .min = min,
-        .c = make_cuDoubleComplex(cr, ci),
+        .cr = cr,
+        .ci = ci,
         .dx = dx,
         .dy = dy
     };
@@ -71,8 +83,9 @@ int main(int argc, char *argv[]) {
     dim3 numBlocks((nx + bDim - 1)/ bDim, (ny + bDim - 1)/ bDim );
 
     juliaset<<<numBlocks, numThreadsPerBlock>>>(params);
+    checkCudaError(cudaDeviceSynchronize());
 
-    cudaMemcpy(dest, d_dest, size, cudaMemcpyDeviceToHost);
+    checkCudaError(cudaMemcpy(dest, d_dest, size, cudaMemcpyDeviceToHost));
 
     std::string filename = "images/juliaset-c=(" + std::to_string(cr) + ", " + std::to_string(ci) + ").png";
     unsigned error = lodepng::encode(filename, dest, nx, ny, LCT_GREY, 8);
@@ -93,7 +106,7 @@ int main(int argc, char *argv[]) {
     }
 
     cudaFree(d_dest);
-    cudaFreeHost(d_dest);
+    cudaFreeHost(dest);
 
     return 0;
 }
