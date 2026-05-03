@@ -1,4 +1,4 @@
-# STREAM Benchmark
+# Julia Set
 
 This folder contains the required files for building and executing the Julia Set example
 
