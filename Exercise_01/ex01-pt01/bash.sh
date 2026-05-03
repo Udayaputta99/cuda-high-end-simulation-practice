@@ -17,11 +17,11 @@ while [ $value -le 100000000 ]; do #less than 10M
     # echo "value is $value"
 done
 
-echo "nx,run,serial_bw" > serial_results.csv
+echo "nx,run,base_bw" > base_results.csv
 for nx in "${sizes[@]}"; do
     for run in {1..10}; do
-        serial_bw=$(./build/stream/stream-base $nx $warmup 10 | grep "bandwidth" | awk '{print $2}')
-        echo "$nx,$run,$serial_bw" >> serial_results.csv
+        base_bw=$(./build/stream/stream-base $nx $warmup 10 | grep "bandwidth" | awk '{print $2}')
+        echo "$nx,$run,$base_bw" >> base_results.csv
     done
 done
 echo "nx,run,omp_bw" > omp_results.csv
