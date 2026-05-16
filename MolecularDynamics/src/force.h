@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 #include <vector>
-
+#include <iostream>
 void createNeighbourList(std::vector<int>& cells_arr, std::vector<int>& neigh_particles_arr,
                          std::vector<Particle>& particles, Domain& domain ){
     // for (int i=0; i<neigh_particles_arr.size(); ++i){
@@ -17,7 +17,8 @@ void createNeighbourList(std::vector<int>& cells_arr, std::vector<int>& neigh_pa
     // Inside force.h -> createNeighbourList
     for (int i = 0; i < neigh_particles_arr.size(); ++i) {
         // Check if particle is outside the positive grid
-        if (particles[i].p_position[0] < 0 || particles[i].p_position[1] < 0 || particles[i].p_position[2] < 0) continue;
+        // the following line is the reason behind 3 plane of particles getting removed in paraview 
+        //if (particles[i].p_position[0] < 0 || particles[i].p_position[1] < 0 || particles[i].p_position[2] < 0) continue;
 
         int cell_x = (int)(particles[i].p_position[0] / domain.rad_cutoff);
         int cell_y = (int)(particles[i].p_position[1] / domain.rad_cutoff);
@@ -31,10 +32,17 @@ void createNeighbourList(std::vector<int>& cells_arr, std::vector<int>& neigh_pa
         
         neigh_particles_arr[i] = cells_arr[c];
         cells_arr[c] = i;
+        std::cout<<"Cell: "<<c<<", Particle: "<<i<<"\n";
     }
 }
 
 void LennardJones(Domain& domain, std::vector<int>& cells_arr, std::vector<int>& neigh_particles_arr, std::vector<Particle>& particles){
+    
+    for (size_t i = 0; i < particles.size(); ++i) {
+        particles[i].p_acceleration[0] = 0.0;
+        particles[i].p_acceleration[1] = 0.0;
+        particles[i].p_acceleration[2] = 0.0;
+    }
     createNeighbourList(cells_arr,neigh_particles_arr,particles,domain);
     for (int l=0; l<cells_arr.size(); ++l){
         int particle_idx = cells_arr[l];
@@ -64,10 +72,12 @@ void LennardJones(Domain& domain, std::vector<int>& cells_arr, std::vector<int>&
                                     double xij_sqrd = pow(particles[particle_idx].p_position[0]-particles[neighbhour_cell_particle_idx].p_position[0],2)+
                                                         pow(particles[particle_idx].p_position[1]-particles[neighbhour_cell_particle_idx].p_position[1],2)+
                                                         pow(particles[particle_idx].p_position[2]-particles[neighbhour_cell_particle_idx].p_position[2],2);
-                                    double sigma_xij_powsix = pow(domain.sigma,6)/ pow(xij_sqrd,3);
-                                    double multiplier = 24*domain.epsilon*sigma_xij_powsix*(2*sigma_xij_powsix-1)*(1.0/xij_sqrd);
-                                    for (auto f=0; f<3;++f){
-                                        Force[f] += multiplier*(particles[particle_idx].p_position[f]-particles[neighbhour_cell_particle_idx].p_position[f]); 
+                                    if (xij_sqrd<domain.rad_cutoff*domain.rad_cutoff){
+                                        double sigma_xij_powsix = pow(domain.sigma,6)/ pow(xij_sqrd,3);
+                                        double multiplier = 24*domain.epsilon*sigma_xij_powsix*(2*sigma_xij_powsix-1)*(1.0/xij_sqrd);
+                                        for (auto f=0; f<3;++f){
+                                            Force[f] += multiplier*(particles[particle_idx].p_position[f]-particles[neighbhour_cell_particle_idx].p_position[f]); 
+                                        }
                                     }
                                 }
                                 neighbhour_cell_particle_idx = neigh_particles_arr[neighbhour_cell_particle_idx];

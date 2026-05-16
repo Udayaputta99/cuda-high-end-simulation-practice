@@ -18,7 +18,7 @@ void writeVTU(const std::string& filename, const double* position, int n, double
     f << "    <Points>\n";
     f << "      <DataArray type=\"Float64\" NumberOfComponents=\"3\" format=\"ascii\">\n";
     for (int i = 0; i < n; i++)
-        f << "        " << position[0] << " " << position[1] << " " << position[2] << "\n";
+        f << "        " << position[3*i+0] << " " << position[3*i+1] << " " << position[3*i+2] << "\n";
         // f << "        " << pos[3*i+0] << " " << pos[3*i+1] << " " << 0 << "\n";
     f << "      </DataArray>\n";
     f << "    </Points>\n";

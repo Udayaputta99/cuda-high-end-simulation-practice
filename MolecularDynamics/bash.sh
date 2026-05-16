@@ -2,9 +2,9 @@ rm -rf vtufiles/
 cd src
 rm *.vtu *.pvd 
 rm main
-g++ --std=c++20 -o main main.cpp
+g++ --std=c++20 -o particleSim particleSim.cpp
 
-./main
+./particleSim > out.txt
 
 tar -cvf particle.tar.gz *.vtu *.pvd
 mkdir ../vtufiles

@@ -9,8 +9,8 @@
 #include "util.h"
 
 std::vector<Particle> generateParticles(const Domain& domain){
-    const double velMin = -0.001;
-    double velMax = 0.01;
+    const double velMin = -0.5;
+    double velMax = 0.5;
     const double mass = 2.0;
     const double radius = 0.5;
     
@@ -60,17 +60,20 @@ int main(){
 
     std::string fname = "particle_"+std::to_string(0)+".vtu";
     writeVTU(fname,particles,domain.n_particles_total,radius);
-
-    for (double it=deltaTime; it<endTime; it += deltaTime){
+    int count = 0;
+    for (double it=deltaTime; it<=endTime; it += deltaTime){
         std::fill(cells_arr.begin(),cells_arr.end(),-1);
         std::fill(neigh_particles_arr.begin(),neigh_particles_arr.end(),-1);
 
         updatePositionVelocityFirstHalf(particles,deltaTime);
         LennardJones(domain,cells_arr,neigh_particles_arr,particles);
+        
         updateVelocitySecondHalf(particles,deltaTime);
         fname = "particle_"+std::to_string(it)+".vtu";
         writeVTU(fname,particles,domain.n_particles_total,radius);
-        // count += 1;
+        std::cout<<"Count: "<<count<<"\n";
+        // if (count==2) break;
+        count += 1;
         // std::cout<<"check"<<count;
         pvd<<"    <DataSet timestep=\"" << it << "\" file=\"" << fname << "\"/>\n";
     }

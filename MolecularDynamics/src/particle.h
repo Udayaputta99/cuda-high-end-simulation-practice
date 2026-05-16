@@ -17,7 +17,7 @@ class Particle{
         
 };
 
-void updatePositionVelocityFirstHalf(std::vector<Particle>& particles, double deltaTime){
+inline void updatePositionVelocityFirstHalf(std::vector<Particle>& particles, double deltaTime){
     int n = particles.size();
     for (int i=0; i<n; ++i){
         particles[i].p_position[0] += particles[i].p_velocity[0]*deltaTime 
@@ -37,7 +37,7 @@ void updatePositionVelocityFirstHalf(std::vector<Particle>& particles, double de
     }
 }
 
-void updateVelocitySecondHalf(std::vector<Particle>& particles, double deltaTime){
+inline void updateVelocitySecondHalf(std::vector<Particle>& particles, double deltaTime){
     int n = particles.size();
     for (int i=0; i<n; ++i){
         particles[i].p_velocity[0] += particles[i].p_acceleration[0]*deltaTime*0.5;

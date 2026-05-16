@@ -1,10 +1,10 @@
 #pragma once
 struct Domain{
-    const int n_particles_x=10;
+    const int n_particles_x=5;
     const int n_particles_y=n_particles_x;
     const int n_particles_z=n_particles_y;
     const int n_particles_total=n_particles_x*n_particles_y*n_particles_z;
-    const double delta_x=5.0;
+    const double delta_x=1.0;
     const double delta_y=delta_x;
     const double delta_z=delta_x;
     const double sigma=1.0;
