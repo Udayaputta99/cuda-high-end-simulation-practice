@@ -23,6 +23,9 @@ This directory contains both the CPU version and the CUDA accelerated versions o
 * To run the GPU version of the code: ```make cuda```
 * The executables can be found in the build directory
 
+### The Result
+[c=-0.8+0.15i](./-0.800000+0.156000i.png)
+
 ## Authors
 
 Contributors names and contact info
