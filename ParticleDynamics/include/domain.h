@@ -29,4 +29,4 @@ struct Domain{
 };
 
 void domainParamInitialization(Domain& domain);
-void domainBoxInitialization(Domain& domain);
+void domainCellsInitialization(Domain& domain);

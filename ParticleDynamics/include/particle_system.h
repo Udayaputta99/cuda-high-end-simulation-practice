@@ -9,11 +9,6 @@ struct ParticleSystem{
     double* acc;
 };
 
-struct NeighbourList{
-    int* cells_arr;
-    int* particles_arr;
-}
-
 void allocateHostMemory(const Domain& domain, ParticleSystem& ps);
 
 void allocateDeviceMemory(const Domain& domain, ParticleSystem& ps);

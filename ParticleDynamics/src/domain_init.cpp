@@ -23,7 +23,7 @@ void domainParamInitialization(Domain& domain){
 
 }
 
-void domainBoxInitialization(Domain& domain){
+void domainCellsInitialization(Domain& domain){
 
     domain.n_cells_x = (int)std::ceil(((double)domain.n_particles_x*domain.delta_x)/domain.rad_cutoff);
     domain.n_cells_y = (int)std::ceil(((double)domain.n_particles_y*domain.delta_y)/domain.rad_cutoff);
