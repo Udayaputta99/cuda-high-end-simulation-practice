@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CUDA_STANDARD 17)
 
 # Set the CUDA architecture to sm_86 (A40, Ampere cards)
-set(CMAKE_CUDA_ARCHITECTURES 86) 
+# set(CMAKE_CUDA_ARCHITECTURES 86) 
 
 # Add all files to the executable target
 add_executable(particlesim
@@ -16,6 +16,7 @@ add_executable(particlesim
     src/cuda/integrator.cu
     src/cuda/memory_manager.cu
     src/cuda/neigh_list.cu
+    src/cuda/energy.cu
 )
 
 # Tell the host compiler (g++) to use -march=native

@@ -1,5 +1,23 @@
 #include <fstream>
 #include <string>
+#include <iostream>
+#include <iomanip>
+#include "domain.h"
+
+void pvdInit(std::ofstream& pvd){
+    pvd << "<?xml version=\"1.0\"?>\n";
+    pvd << "<VTKFile type=\"Collection\" version=\"0.1\">\n";
+    pvd << "  <Collection>\n";
+}
+
+void pvdWriteVTU(std::ofstream& pvd, int count, std::string fname){
+    pvd<<"    <DataSet timestep=\"" << count << "\" file=\"" << fname << "\"/>\n";
+}
+
+void pvdFinalize(std::ofstream& pvd){
+    pvd<<"  </Collection>\n";
+    pvd<<"</VTKFile>\n";
+}
 
 void writeVTU(const std::string& filename, const double* pos, int N, double radius)
 {
@@ -30,9 +48,7 @@ void writeVTU(const std::string& filename, const double* pos, int N, double radi
     f << "</VTKFile>\n";
 }
 
-#include <iostream>
-#include <iomanip>
-#include "domain.h"
+
 
 void printSolverDetails(const Domain& domain) {
     // Define a consistent width for column alignment

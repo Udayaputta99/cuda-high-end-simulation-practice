@@ -1,8 +1,8 @@
 #include <cuda_runtime.h>
 #include "domain.h"
 #include "particle_system.h"
-#include "kernels.cuh"
-#include "neigh_list.cuh"
+#include "cudaError.h"
+#include "neigh_list.h"
 
 void allocateDeviceMemory(const Domain& domain, ParticleSystem& dev_ps){
     // ps.n_particles = domain.n_particles_total;
@@ -22,7 +22,7 @@ void allocateDeviceMemory(const Domain& domain, NeighbourList& dev_nl){
 //overloaded function for allocating device memory for tot. kinetic energy
 void allocateDeviceMemory(Domain& domain){
     cudaMalloc(&domain.total_ke, sizeof(double));
-    cudaCheckError(cudaGetLastError());
+    checkCudaError(cudaGetLastError());
 }
 
 void freeDeviceMemory(ParticleSystem& dev_ps){
@@ -49,22 +49,26 @@ void freeDeviceMemory(Domain& domain){
     domain.total_ke = nullptr;
 }
 
-void copyHostToDevice(const ParticleSystem& host_ps, ParticleSystem& dev_ps, const Domain& domain){
+void copyHostToDevice(ParticleSystem& dev_ps, ParticleSystem& host_ps,  const Domain& domain){
     cudaMemcpy(dev_ps.pos, host_ps.pos, 3*domain.n_particles_total*sizeof(double),cudaMemcpyHostToDevice);
     checkCudaError(cudaGetLastError());
 }
 
-void copyDeviceToHost(const ParticleSystem& host_ps, ParticleSystem& dev_ps, const Domain& domain){
+void copyDeviceToHost(ParticleSystem& host_ps, ParticleSystem& dev_ps, const Domain& domain){
     cudaMemcpy(host_ps.pos, dev_ps.pos, 3*domain.n_particles_total*sizeof(double),cudaMemcpyDeviceToHost);
     checkCudaError(cudaGetLastError());
 }
 
-void copyHostToDevice(const Domain& host_domain, Domain& dev_domain){
-    cudaMemcpy(dev_domain.total_ke, host_domain.total_ke, sizeof(double), cudaMemcpyHostToDevice);
-    checkCudaError(cudaGetLastError());
-}
+// void copyHostToDevice(const Domain& host_domain, Domain& domain){
+//     cudaMemcpy(dev_domain.total_ke, host_domain.total_ke, sizeof(double), cudaMemcpyHostToDevice);
+//     checkCudaError(cudaGetLastError());
+// }
 
-void copyDeviceToHost(Domain& host_domain, const Domain& dev_domain){
-    cudaMemcpy(host_domain.total_ke, dev_domain.total_ke, sizeof(double), cudaMemcpyDeviceToHost);
-    checkCudaError(cudaGetLastError());
+// void copyDeviceToHost(Domain& host_domain, const Domain& dev_domain){
+//     cudaMemcpy(host_domain.total_ke, dev_domain.total_ke, sizeof(double), cudaMemcpyDeviceToHost);
+//     checkCudaError(cudaGetLastError());
+// }
+
+void synchronizeKernels(){
+    checkCudaError(cudaDeviceSynchronize());
 }

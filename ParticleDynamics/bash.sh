@@ -13,4 +13,9 @@ mkdir build/
 cd build/
 cmake ..
 make 
+echo "------- RUNNING SIM -------"
+./particlesim 
+echo "compressing output files"
+tar -cvf particles.tar.gz *.vtu *.pvd
+rm -r *.vtu *.pvd 
 

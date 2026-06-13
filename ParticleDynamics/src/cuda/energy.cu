@@ -1,7 +1,6 @@
 #include <particle_system.h>
-
-
-__global__ void energyKernel(const double* __restrict__ mass, 
+#include "cudaError.h"
+__global__ void energyKernel(const double mass, 
                              const double* __restrict__ vel, 
                              double* __restrict__ total_ke, 
                              const int n_particles_total){
@@ -15,7 +14,7 @@ __global__ void energyKernel(const double* __restrict__ mass,
 
     // Calculate individual kinetic energy: 0.5 * m * v^2
     double v_sqrd = vx*vx + vy*vy + vz*vz;
-    double particle_ke = 0.5 * mass[idx] * v_sqrd;
+    double particle_ke = 0.5 * mass * v_sqrd;
 
     // Atomically add this particle's KE to the total system KE accumulator
     atomicAdd(total_ke, particle_ke);

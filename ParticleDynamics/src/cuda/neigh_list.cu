@@ -1,10 +1,12 @@
 #include <cuda_runtime.h>
-#include "neigh_list.cuh"
+#include "neigh_list.h"
 #include "domain.h"
+#include "particle_system.h"
+#include "cudaError.h"
 
-void resetCellsParticlesArray(NeighbourList& dev_nl, const Domain& domain){
+void resetCellsParticlesArrays(NeighbourList& dev_nl, const Domain& domain){
     cudaMemset(dev_nl.cells_arr, -1, domain.n_cells_total*sizeof(int));
-    cudaMemset(dev_nl.particles_arr, -1, domain.n_cells_total*sizeof(int));
+    cudaMemset(dev_nl.particles_arr, -1, domain.n_particles_total*sizeof(int));
 }
 
 __global__ void createNeighbourList(const Domain domain, 
@@ -14,9 +16,18 @@ __global__ void createNeighbourList(const Domain domain,
     const int idx = blockDim.x*blockIdx.x + threadIdx.x;
     if (idx>=domain.n_particles_total) return;
     //following is to find the cell each particle belongs to, works since 1 thread --> 1 particle
+    // int cell_x = __double2int_rd(pos[3*idx+0]/domain.rad_cutoff);
+    // int cell_y = __double2int_rd(pos[3*idx+1]/domain.rad_cutoff);
+    // int cell_z = __double2int_rd(pos[3*idx+2]/domain.rad_cutoff);
     int cell_x = (int)(pos[3*idx+0]/domain.rad_cutoff);
     int cell_y = (int)(pos[3*idx+1]/domain.rad_cutoff);
     int cell_z = (int)(pos[3*idx+2]/domain.rad_cutoff);
+    if (domain.bc == PERIODIC) {
+        // Wrap grid coordinates periodically
+        cell_x = (cell_x % domain.n_cells_x + domain.n_cells_x) % domain.n_cells_x;
+        cell_y = (cell_y % domain.n_cells_y + domain.n_cells_y) % domain.n_cells_y;
+        cell_z = (cell_z % domain.n_cells_z + domain.n_cells_z) % domain.n_cells_z;
+    }
     if (cell_x < domain.n_cells_x && cell_y < domain.n_cells_y && cell_z < domain.n_cells_z
         && cell_x >=0 && cell_y >=0 && cell_z >=0){
         int cell_idx = cell_x + domain.n_cells_x*cell_y + domain.n_cells_x*domain.n_cells_y*cell_z;
@@ -25,9 +36,9 @@ __global__ void createNeighbourList(const Domain domain,
     }
 }
 
-void launchCreateNeighbourListKernel(const Domain domain, 
+void launchCreateNeighbourListKernel(const Domain& domain, 
                                     NeighbourList& dev_nl,
-                                    const ParticleSystem& dev_ps,
+                                    ParticleSystem& dev_ps,
                                     const int blocks,const int threads){
     createNeighbourList<<<blocks,threads>>>(domain,dev_nl.cells_arr,dev_nl.particles_arr,dev_ps.pos);
     checkCudaError(cudaGetLastError());

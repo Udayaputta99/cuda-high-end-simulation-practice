@@ -27,6 +27,7 @@ struct Domain{
 
     bool gravityEnabled;
     BC bc;
+    double* total_ke;
 };
 
 void domainParamInitialization(Domain& domain);
