@@ -14,7 +14,8 @@ add_executable(particlesim
     src/IO.cpp
     src/domain_init.cpp
     src/cuda/integrator.cu
-    src/cuda/particle_system.cu
+    src/cuda/memory_manager.cu
+    src/cuda/neigh_list.cu
 )
 
 # Tell the host compiler (g++) to use -march=native
