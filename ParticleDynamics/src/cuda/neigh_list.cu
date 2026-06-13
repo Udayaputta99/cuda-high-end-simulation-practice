@@ -2,6 +2,11 @@
 #include "neigh_list.cuh"
 #include "domain.h"
 
+void initializeCellsParticlesArray(NeighbourList& dev_nl){
+    cudaMemset(dev_nl.cells_arr, -1, domain.n_cells_total*sizeof(int));
+    cudaMemset(dev_nl.particles_arr, -1, domain.n_cells_total*sizeof(int));
+}
+
 __global__ void createNeighbourList(const Domain domain, 
                                     int* __restrict__ cells_arr,
                                     int* __restrict__ particles_arr,
