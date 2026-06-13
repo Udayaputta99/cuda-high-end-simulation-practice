@@ -7,11 +7,11 @@ CUDA_DEFINES =
 
 CUDA_INCLUDES = --options-file CMakeFiles/particlesim.dir/includes_CUDA.rsp
 
-CUDA_FLAGS = -std=c++17 "--generate-code=arch=compute_75,code=[compute_75,sm_75]"
+CUDA_FLAGS = -std=c++17 "--generate-code=arch=compute_86,code=[compute_86,sm_86]"
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/include
+CXX_INCLUDES = -I/home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/ParticleDynamics/include
 
-CXX_FLAGS = -std=c++23
+CXX_FLAGS = -std=c++23 -march=native
 

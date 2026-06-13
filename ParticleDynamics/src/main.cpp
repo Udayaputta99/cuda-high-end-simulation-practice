@@ -1,6 +1,9 @@
 #include "domain.h"
 #include "particle_system.h"
 #include "utils.h"
+#include <neigh_list.cuh>
+#include <memory_manager.cuh>
+
 
 int main(int argc, char* argv[]){
     Domain domain;
@@ -19,7 +22,6 @@ int main(int argc, char* argv[]){
 
     printSolverDetails(domain);
 
-    allocateDeviceMemory(dev_nl);
     // int count = 0;
     // outputFile(count,host_ps.pos,domain.n_particles_total,host_ps.radius);
     for (double it=0.0; it<=domain.endTime; it += domain.deltaTime){

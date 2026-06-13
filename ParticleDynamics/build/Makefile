@@ -57,10 +57,10 @@ RM = /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/gcc-11.5.0/cmake-3.3
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics
+CMAKE_SOURCE_DIR = /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/ParticleDynamics
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/build
+CMAKE_BINARY_DIR = /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/ParticleDynamics/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/build/CMakeFiles /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/ParticleDynamics/build/CMakeFiles /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/ParticleDynamics/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/ParticleDynamics/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,29 +177,53 @@ src/cuda/integrator.cu.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/integrator.cu.s
 .PHONY : src/cuda/integrator.cu.s
 
-src/cuda/particle_system.o: src/cuda/particle_system.cu.o
-.PHONY : src/cuda/particle_system.o
+src/cuda/memory_manager.o: src/cuda/memory_manager.cu.o
+.PHONY : src/cuda/memory_manager.o
 
 # target to build an object file
-src/cuda/particle_system.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/particle_system.cu.o
-.PHONY : src/cuda/particle_system.cu.o
+src/cuda/memory_manager.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/memory_manager.cu.o
+.PHONY : src/cuda/memory_manager.cu.o
 
-src/cuda/particle_system.i: src/cuda/particle_system.cu.i
-.PHONY : src/cuda/particle_system.i
+src/cuda/memory_manager.i: src/cuda/memory_manager.cu.i
+.PHONY : src/cuda/memory_manager.i
 
 # target to preprocess a source file
-src/cuda/particle_system.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/particle_system.cu.i
-.PHONY : src/cuda/particle_system.cu.i
+src/cuda/memory_manager.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/memory_manager.cu.i
+.PHONY : src/cuda/memory_manager.cu.i
 
-src/cuda/particle_system.s: src/cuda/particle_system.cu.s
-.PHONY : src/cuda/particle_system.s
+src/cuda/memory_manager.s: src/cuda/memory_manager.cu.s
+.PHONY : src/cuda/memory_manager.s
 
 # target to generate assembly for a file
-src/cuda/particle_system.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/particle_system.cu.s
-.PHONY : src/cuda/particle_system.cu.s
+src/cuda/memory_manager.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/memory_manager.cu.s
+.PHONY : src/cuda/memory_manager.cu.s
+
+src/cuda/neigh_list.o: src/cuda/neigh_list.cu.o
+.PHONY : src/cuda/neigh_list.o
+
+# target to build an object file
+src/cuda/neigh_list.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/neigh_list.cu.o
+.PHONY : src/cuda/neigh_list.cu.o
+
+src/cuda/neigh_list.i: src/cuda/neigh_list.cu.i
+.PHONY : src/cuda/neigh_list.i
+
+# target to preprocess a source file
+src/cuda/neigh_list.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/neigh_list.cu.i
+.PHONY : src/cuda/neigh_list.cu.i
+
+src/cuda/neigh_list.s: src/cuda/neigh_list.cu.s
+.PHONY : src/cuda/neigh_list.s
+
+# target to generate assembly for a file
+src/cuda/neigh_list.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/neigh_list.cu.s
+.PHONY : src/cuda/neigh_list.cu.s
 
 src/domain_init.o: src/domain_init.cpp.o
 .PHONY : src/domain_init.o
@@ -288,9 +312,12 @@ help:
 	@echo "... src/cuda/integrator.o"
 	@echo "... src/cuda/integrator.i"
 	@echo "... src/cuda/integrator.s"
-	@echo "... src/cuda/particle_system.o"
-	@echo "... src/cuda/particle_system.i"
-	@echo "... src/cuda/particle_system.s"
+	@echo "... src/cuda/memory_manager.o"
+	@echo "... src/cuda/memory_manager.i"
+	@echo "... src/cuda/memory_manager.s"
+	@echo "... src/cuda/neigh_list.o"
+	@echo "... src/cuda/neigh_list.i"
+	@echo "... src/cuda/neigh_list.s"
 	@echo "... src/domain_init.o"
 	@echo "... src/domain_init.i"
 	@echo "... src/domain_init.s"
