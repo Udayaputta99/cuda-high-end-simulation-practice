@@ -62,7 +62,7 @@ set(CMAKE_CUDA_COMPILER_LIBRARY_ROOT "/apps/SPACK/1.1.1-alex/opt/spack/linux-alm
 
 set(CMAKE_CUDA_ARCHITECTURES_ALL "75-real;80-real;86-real;87-real;88-real;89-real;90-real;100-real;103-real;110-real;120-real;121")
 set(CMAKE_CUDA_ARCHITECTURES_ALL_MAJOR "75-real;80-real;90-real;100-real;110-real;120")
-set(CMAKE_CUDA_ARCHITECTURES_NATIVE "No CUDA devices found.-real")
+set(CMAKE_CUDA_ARCHITECTURES_NATIVE "86-real")
 
 set(CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES "/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/cuda/13.1/targets/x86_64-linux/include;/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/cuda/13.1/targets/x86_64-linux/include/cccl")
 
