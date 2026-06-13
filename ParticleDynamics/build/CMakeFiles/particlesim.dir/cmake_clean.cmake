@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/particlesim.dir/src/IO.cpp.o"
   "CMakeFiles/particlesim.dir/src/IO.cpp.o.d"
+  "CMakeFiles/particlesim.dir/src/cuda/energy.cu.o"
+  "CMakeFiles/particlesim.dir/src/cuda/energy.cu.o.d"
   "CMakeFiles/particlesim.dir/src/cuda/integrator.cu.o"
   "CMakeFiles/particlesim.dir/src/cuda/integrator.cu.o.d"
   "CMakeFiles/particlesim.dir/src/cuda/memory_manager.cu.o"

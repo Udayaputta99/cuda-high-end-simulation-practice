@@ -153,6 +153,30 @@ src/IO.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/IO.cpp.s
 .PHONY : src/IO.cpp.s
 
+src/cuda/energy.o: src/cuda/energy.cu.o
+.PHONY : src/cuda/energy.o
+
+# target to build an object file
+src/cuda/energy.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/energy.cu.o
+.PHONY : src/cuda/energy.cu.o
+
+src/cuda/energy.i: src/cuda/energy.cu.i
+.PHONY : src/cuda/energy.i
+
+# target to preprocess a source file
+src/cuda/energy.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/energy.cu.i
+.PHONY : src/cuda/energy.cu.i
+
+src/cuda/energy.s: src/cuda/energy.cu.s
+.PHONY : src/cuda/energy.s
+
+# target to generate assembly for a file
+src/cuda/energy.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/cuda/energy.cu.s
+.PHONY : src/cuda/energy.cu.s
+
 src/cuda/integrator.o: src/cuda/integrator.cu.o
 .PHONY : src/cuda/integrator.o
 
@@ -309,6 +333,9 @@ help:
 	@echo "... src/IO.o"
 	@echo "... src/IO.i"
 	@echo "... src/IO.s"
+	@echo "... src/cuda/energy.o"
+	@echo "... src/cuda/energy.i"
+	@echo "... src/cuda/energy.s"
 	@echo "... src/cuda/integrator.o"
 	@echo "... src/cuda/integrator.i"
 	@echo "... src/cuda/integrator.s"
