@@ -19,10 +19,23 @@ __global__ void updatePosVelFirstHalfKernel(const Domain domain, double* pos,
     if (domain.bc == PERIODIC){
             if (pos[3*idx+0]<0.0) pos[3*idx+0] += domain.dom_len_x; 
             if (pos[3*idx+0]>=domain.dom_len_x) pos[3*idx+0] -= domain.dom_len_x; 
+
             if (pos[3*idx+1]<0.0) pos[3*idx+1] += domain.dom_len_y; 
             if (pos[3*idx+1]>=domain.dom_len_y) pos[3*idx+1] -= domain.dom_len_y;
+
             if (pos[3*idx+2]<0.0) pos[3*idx+2] += domain.dom_len_z; 
             if (pos[3*idx+2]>=domain.dom_len_z) pos[3*idx+2] -= domain.dom_len_z;
+    }
+    else if (domain.bc == REFLECTIVE) {
+
+        if (pos[3*idx+0] < 0.0) { pos[3*idx+0] = -pos[3*idx+0]; vel[3*idx+0] = -vel[3*idx+0]; }
+        else if (pos[3*idx+0] >= domain.dom_len_x) { pos[3*idx+0] = 2.0 * domain.dom_len_x - pos[3*idx+0]; vel[3*idx+0] = -vel[3*idx+0]; }
+
+        if (pos[3*idx+1] < 0.0) { pos[3*idx+1] = -pos[3*idx+1]; vel[3*idx+1] = -vel[3*idx+1]; } 
+        else if (pos[3*idx+1] >= domain.dom_len_y) { pos[3*idx+1] = 2.0 * domain.dom_len_y - pos[3*idx+1]; vel[3*idx+1] = -vel[3*idx+1]; }
+
+        if (pos[3*idx+2] < 0.0) { pos[3*idx+2] = -pos[3*idx+2]; vel[3*idx+2] = -vel[3*idx+2]; } 
+        else if (pos[3*idx+2] >= domain.dom_len_z) { pos[3*idx+2] = 2.0 * domain.dom_len_z - pos[3*idx+2]; vel[3*idx+2] = -vel[3*idx+2]; }
     }
 }
 
