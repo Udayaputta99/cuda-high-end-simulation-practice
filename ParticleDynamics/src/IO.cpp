@@ -63,13 +63,13 @@ void printSolverDetails(const Domain& domain) {
     std::cout << "--------------------------------------------------\n";
 
     // 3. Physical Space Dimensions
-    std::cout << "Simulation Box Size:\n";
-    std::cout << "  " << std::left << std::setw(w - 2) << "X-Length:" << domain.box_len_x << "\n";
+    std::cout << "Cell Size:\n";
+    std::cout << "  " << std::left << std::setw(w - 2) << "X-Length:" << domain.cell_width_x << "\n";
     if (domain.dimension >= 2) {
-        std::cout << "  " << std::left << std::setw(w - 2) << "Y-Length:" << domain.box_len_y << "\n";
+        std::cout << "  " << std::left << std::setw(w - 2) << "Y-Length:" << domain.cell_width_y << "\n";
     }
     if (domain.dimension == 3) {
-        std::cout << "  " << std::left << std::setw(w - 2) << "Z-Length:" << domain.box_len_z << "\n";
+        std::cout << "  " << std::left << std::setw(w - 2) << "Z-Length:" << domain.cell_width_z << "\n";
     }
 
     std::cout << "--------------------------------------------------\n";

@@ -15,20 +15,20 @@ __global__ void updatePosVelFirstHalfKernel(const Domain domain, double* pos,
     vel[3*idx+0] += acc[3*idx+0]*dt*0.5;
     vel[3*idx+1] += acc[3*idx+1]*dt*0.5;
     vel[3*idx+2] += acc[3*idx+2]*dt*0.5;  
-
+    
     if (domain.bc == PERIODIC){
-            if (pos[3*idx+0]<0.0) pos[3*idx+0] += domain.box_len_x; 
-            if (pos[3*idx+0]>=domain.box_len_x) pos[3*idx+0] -= domain.box_len_x; 
-            if (pos[3*idx+1]<0.0) pos[3*idx+1] += domain.box_len_y; 
-            if (pos[3*idx+1]>=domain.box_len_y) pos[3*idx+1] -= domain.box_len_y;
-            if (pos[3*idx+2]<0.0) pos[3*idx+2] += domain.box_len_z; 
-            if (pos[3*idx+2]>=domain.box_len_z) pos[3*idx+2] -= domain.box_len_z;
+            if (pos[3*idx+0]<0.0) pos[3*idx+0] += domain.dom_len_x; 
+            if (pos[3*idx+0]>=domain.dom_len_x) pos[3*idx+0] -= domain.dom_len_x; 
+            if (pos[3*idx+1]<0.0) pos[3*idx+1] += domain.dom_len_y; 
+            if (pos[3*idx+1]>=domain.dom_len_y) pos[3*idx+1] -= domain.dom_len_y;
+            if (pos[3*idx+2]<0.0) pos[3*idx+2] += domain.dom_len_z; 
+            if (pos[3*idx+2]>=domain.dom_len_z) pos[3*idx+2] -= domain.dom_len_z;
     }
 }
 
 __global__ void LennardJonesPotentialVelocitySeconfHalfKernel(const Domain domain,
                                             const int* __restrict__ cells_arr,
-                                            const int* __restrict__ neigh_particles_arr,
+                                            const int* __restrict__ particles_arr,
                                             double* __restrict__ pos,
                                             double* __restrict__ vel,
                                             double* __restrict__ acc,
@@ -62,7 +62,13 @@ __global__ void LennardJonesPotentialVelocitySeconfHalfKernel(const Domain domai
                 int neigh_i = i+dx;
                 int neigh_j = j+dy;
                 int neigh_k = k+dz;
-                
+                int neigh_cell_idx = neigh_i + domain.n_cells_x*neigh_j + domain.n_cells_x*domain.n_cells_y*neigh_k;
+                int neigh_particle_idx = cells_arr[neigh_cell_idx];
+                while (neigh_particle_idx!=-1){
+                    if (neigh_particle_idx != idx){
+                        
+                    }
+                }
             }
         }
     }

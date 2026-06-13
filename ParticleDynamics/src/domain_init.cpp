@@ -37,5 +37,7 @@ void domainCellsInitialization(Domain& domain){
     domain.cell_width_x = domain.rad_cutoff;
     domain.cell_width_y = domain.rad_cutoff;
     domain.cell_width_z = domain.rad_cutoff;
-
+    domain.dom_len_x = (double)domain.n_cells_x*domain.cell_width_x;
+    domain.dom_len_y = (double)domain.n_cells_y*domain.cell_width_y;
+    domain.dom_len_z = (double)domain.n_cells_z*domain.cell_width_z;
 }

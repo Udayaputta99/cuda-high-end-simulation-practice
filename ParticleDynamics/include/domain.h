@@ -2,8 +2,8 @@
 #include <string>
 
 enum BC{
-    PERIODIC,
-    REFLECTIVE
+    PERIODIC, //0
+    REFLECTIVE //1
 };
 
 struct Domain{
@@ -15,7 +15,8 @@ struct Domain{
     int n_cells_x, n_cells_y, n_cells_z;
     int n_cells_total;
     double cell_width_x, cell_width_y, cell_width_z;
-
+    double dom_len_x, dom_len_y, dom_len_z;
+     
     double delta_x, delta_y, delta_z;
     double rad_cutoff;
     double sigma;

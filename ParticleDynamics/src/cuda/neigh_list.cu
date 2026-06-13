@@ -2,7 +2,7 @@
 #include "neigh_list.cuh"
 #include "domain.h"
 
-void initializeCellsParticlesArray(NeighbourList& dev_nl){
+void resetCellsParticlesArray(NeighbourList& dev_nl, const Domain& domain){
     cudaMemset(dev_nl.cells_arr, -1, domain.n_cells_total*sizeof(int));
     cudaMemset(dev_nl.particles_arr, -1, domain.n_cells_total*sizeof(int));
 }
@@ -23,4 +23,14 @@ __global__ void createNeighbourList(const Domain domain,
         int old_head_idx = atomicExch(&cells_arr[cell_idx],idx);
         particles_arr[idx] = old_head_idx;
     }
+}
+
+void launchCreateNeighbourListKernel(const Domain domain, 
+                                    NeighbourList& dev_nl,
+                                    const ParticleSystem& dev_ps,
+                                    const int blocks,const int threads){
+    createNeighbourList<<<blocks,threads>>>(domain,dev_nl.cells_arr,dev_nl.particles_arr,dev_ps.pos);
+    checkCudaError(cudaGetLastError());
+    checkCudaError(cudaDeviceSynchronize());
+
 }
