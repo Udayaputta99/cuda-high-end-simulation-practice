@@ -11,10 +11,21 @@ void allocateDeviceMemory(const Domain& domain, ParticleSystem& dev_ps){
     checkCudaError(cudaGetLastError());
 }
 
+//overloaded function for allocating device memory for cells and particles arr 
+void allocateDeviceMemory(const Domain& domain, NeighbourList& nl){
+    cudaMalloc(&nl.cells_arr, domain.n_cells_total*sizeof(int));
+    cudaMalloc(&nl.particles_arr, domain.n_particles_total*sizeof(int));
+    checkCudaError(cudaGetLastError());
+}   
+
 void freeDeviceMemory(ParticleSystem& dev_ps){
     cudaFree(dev_ps.pos);
     cudaFree(dev_ps.vel);
     cudaFree(dev_ps.acc);
+    checkCudaError(cudaGetLastError());
+    dev_ps.pos = nullptr;
+    dev_ps.vel = nullptr;
+    dev_ps.acc = nullptr;    
 }
 
 void copyHostToDevice(const ParticleSystem& host_ps, ParticleSystem& dev_ps, const Domain& domain){

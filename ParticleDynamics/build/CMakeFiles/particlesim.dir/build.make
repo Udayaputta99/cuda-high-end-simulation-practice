@@ -100,19 +100,19 @@ CMakeFiles/particlesim.dir/src/particle_system.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/particlesim.dir/src/particle_system.cpp.s"
 	/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/particle_system.cpp -o CMakeFiles/particlesim.dir/src/particle_system.cpp.s
 
-CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o: CMakeFiles/particlesim.dir/flags.make
-CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o: /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/vtuWriter.cpp
-CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o: CMakeFiles/particlesim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o"
-	/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o -MF CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o.d -o CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o -c /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/vtuWriter.cpp
+CMakeFiles/particlesim.dir/src/IO.cpp.o: CMakeFiles/particlesim.dir/flags.make
+CMakeFiles/particlesim.dir/src/IO.cpp.o: /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/IO.cpp
+CMakeFiles/particlesim.dir/src/IO.cpp.o: CMakeFiles/particlesim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/particlesim.dir/src/IO.cpp.o"
+	/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/particlesim.dir/src/IO.cpp.o -MF CMakeFiles/particlesim.dir/src/IO.cpp.o.d -o CMakeFiles/particlesim.dir/src/IO.cpp.o -c /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/IO.cpp
 
-CMakeFiles/particlesim.dir/src/vtuWriter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/particlesim.dir/src/vtuWriter.cpp.i"
-	/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/vtuWriter.cpp > CMakeFiles/particlesim.dir/src/vtuWriter.cpp.i
+CMakeFiles/particlesim.dir/src/IO.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/particlesim.dir/src/IO.cpp.i"
+	/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/IO.cpp > CMakeFiles/particlesim.dir/src/IO.cpp.i
 
-CMakeFiles/particlesim.dir/src/vtuWriter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/particlesim.dir/src/vtuWriter.cpp.s"
-	/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/vtuWriter.cpp -o CMakeFiles/particlesim.dir/src/vtuWriter.cpp.s
+CMakeFiles/particlesim.dir/src/IO.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/particlesim.dir/src/IO.cpp.s"
+	/apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/IO.cpp -o CMakeFiles/particlesim.dir/src/IO.cpp.s
 
 CMakeFiles/particlesim.dir/src/domain_init.cpp.o: CMakeFiles/particlesim.dir/flags.make
 CMakeFiles/particlesim.dir/src/domain_init.cpp.o: /home/hpc/hesp/hesp170v/High-End-Sim-Exercise/ParticleDynamics/src/domain_init.cpp
@@ -162,7 +162,7 @@ CMakeFiles/particlesim.dir/src/cuda/particle_system.cu.s: cmake_force
 particlesim_OBJECTS = \
 "CMakeFiles/particlesim.dir/src/main.cpp.o" \
 "CMakeFiles/particlesim.dir/src/particle_system.cpp.o" \
-"CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o" \
+"CMakeFiles/particlesim.dir/src/IO.cpp.o" \
 "CMakeFiles/particlesim.dir/src/domain_init.cpp.o" \
 "CMakeFiles/particlesim.dir/src/cuda/integrator.cu.o" \
 "CMakeFiles/particlesim.dir/src/cuda/particle_system.cu.o"
@@ -172,7 +172,7 @@ particlesim_EXTERNAL_OBJECTS =
 
 particlesim: CMakeFiles/particlesim.dir/src/main.cpp.o
 particlesim: CMakeFiles/particlesim.dir/src/particle_system.cpp.o
-particlesim: CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o
+particlesim: CMakeFiles/particlesim.dir/src/IO.cpp.o
 particlesim: CMakeFiles/particlesim.dir/src/domain_init.cpp.o
 particlesim: CMakeFiles/particlesim.dir/src/cuda/integrator.cu.o
 particlesim: CMakeFiles/particlesim.dir/src/cuda/particle_system.cu.o

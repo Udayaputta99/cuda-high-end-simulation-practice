@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/particlesim.dir/src/IO.cpp.o"
+  "CMakeFiles/particlesim.dir/src/IO.cpp.o.d"
   "CMakeFiles/particlesim.dir/src/cuda/integrator.cu.o"
   "CMakeFiles/particlesim.dir/src/cuda/integrator.cu.o.d"
   "CMakeFiles/particlesim.dir/src/cuda/particle_system.cu.o"
@@ -9,8 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/particlesim.dir/src/main.cpp.o.d"
   "CMakeFiles/particlesim.dir/src/particle_system.cpp.o"
   "CMakeFiles/particlesim.dir/src/particle_system.cpp.o.d"
-  "CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o"
-  "CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o.d"
   "particlesim"
   "particlesim.pdb"
 )

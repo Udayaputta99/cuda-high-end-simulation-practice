@@ -8,7 +8,7 @@ set(CMAKE_CUDA_STANDARD 17)
 add_executable(particlesim
     src/main.cpp
     src/particle_system.cpp
-    src/vtuWriter.cpp
+    src/IO.cpp
     src/domain_init.cpp
     src/cuda/integrator.cu
     src/cuda/particle_system.cu

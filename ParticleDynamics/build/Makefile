@@ -129,6 +129,30 @@ particlesim/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/build
 .PHONY : particlesim/fast
 
+src/IO.o: src/IO.cpp.o
+.PHONY : src/IO.o
+
+# target to build an object file
+src/IO.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/IO.cpp.o
+.PHONY : src/IO.cpp.o
+
+src/IO.i: src/IO.cpp.i
+.PHONY : src/IO.i
+
+# target to preprocess a source file
+src/IO.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/IO.cpp.i
+.PHONY : src/IO.cpp.i
+
+src/IO.s: src/IO.cpp.s
+.PHONY : src/IO.s
+
+# target to generate assembly for a file
+src/IO.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/IO.cpp.s
+.PHONY : src/IO.cpp.s
+
 src/cuda/integrator.o: src/cuda/integrator.cu.o
 .PHONY : src/cuda/integrator.o
 
@@ -249,30 +273,6 @@ src/particle_system.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/particle_system.cpp.s
 .PHONY : src/particle_system.cpp.s
 
-src/vtuWriter.o: src/vtuWriter.cpp.o
-.PHONY : src/vtuWriter.o
-
-# target to build an object file
-src/vtuWriter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/vtuWriter.cpp.o
-.PHONY : src/vtuWriter.cpp.o
-
-src/vtuWriter.i: src/vtuWriter.cpp.i
-.PHONY : src/vtuWriter.i
-
-# target to preprocess a source file
-src/vtuWriter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/vtuWriter.cpp.i
-.PHONY : src/vtuWriter.cpp.i
-
-src/vtuWriter.s: src/vtuWriter.cpp.s
-.PHONY : src/vtuWriter.s
-
-# target to generate assembly for a file
-src/vtuWriter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/particlesim.dir/build.make CMakeFiles/particlesim.dir/src/vtuWriter.cpp.s
-.PHONY : src/vtuWriter.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +282,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... particlesim"
+	@echo "... src/IO.o"
+	@echo "... src/IO.i"
+	@echo "... src/IO.s"
 	@echo "... src/cuda/integrator.o"
 	@echo "... src/cuda/integrator.i"
 	@echo "... src/cuda/integrator.s"
@@ -297,9 +300,6 @@ help:
 	@echo "... src/particle_system.o"
 	@echo "... src/particle_system.i"
 	@echo "... src/particle_system.s"
-	@echo "... src/vtuWriter.o"
-	@echo "... src/vtuWriter.i"
-	@echo "... src/vtuWriter.s"
 .PHONY : help
 
 
