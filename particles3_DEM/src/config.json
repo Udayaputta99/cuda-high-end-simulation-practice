@@ -1,0 +1,20 @@
+{
+    "number_of_particles": 512,
+    "mass": 1.0,
+    "radius": 0.25,
+    "temperature": 0.1,
+    "kB": 1.0,
+
+    "time_step": 0.00005,
+    "number_of_steps": 60000,
+
+    "cell_size": 0.6,
+    "no_of_cells": 30,
+
+    "spring_constant": 20000.0,
+    "dissipation_constant": 80.0,
+
+    "gravity": 9.81,
+
+    "write_interval": 200
+}
