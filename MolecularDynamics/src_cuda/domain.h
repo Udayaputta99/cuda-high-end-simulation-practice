@@ -19,4 +19,5 @@ struct Domain{
     const double gravity = -0.5; //in reduced units, in -ve y direction
     int n_cells_x; //same across all axes
     int n_cells_total;
+    double* total_ke;
 };
