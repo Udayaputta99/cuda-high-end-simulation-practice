@@ -1,0 +1,187 @@
+### Starting TaskPrologue of job 3789486 on a1722 at Sat Jun 27 05:43:40 PM CEST 2026
+Running on cores 0-15 with governor performance
+Sat Jun 27 17:43:40 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:01:00.0 Off |                  Off |
+|  0%   35C    P8             29W /  300W |       0MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+-- The CXX compiler identification is NVHPC 26.3.0
+-- The CUDA compiler identification is NVIDIA 13.1.115 with host compiler GNU 11.5.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Configuring done (4.3s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build
+[ 50%] Building CXX object CMakeFiles/lbm.dir/src/lbm.cpp.o
+[100%] Linking CXX executable lbm
+[100%] Built target lbm
+Allocating the memory
+
+Initialize the flow
+
+Start the time iteration loop
+
+[DEBUG] Entering time step: 0
+[INFO] Saved simulation snapshot to: output_0.vtu
+rho mid: 1
+Step: 0 | Centerline Velocity Ux: 0.000133338
+[DEBUG] Entering time step: 0.2
+[INFO] Saved simulation snapshot to: output_1.vtu
+[DEBUG] Entering time step: 0.4
+[INFO] Saved simulation snapshot to: output_2.vtu
+[DEBUG] Entering time step: 0.6
+[INFO] Saved simulation snapshot to: output_3.vtu
+[DEBUG] Entering time step: 0.8
+[INFO] Saved simulation snapshot to: output_4.vtu
+[DEBUG] Entering time step: 1
+[INFO] Saved simulation snapshot to: output_5.vtu
+[DEBUG] Entering time step: 1.2
+[INFO] Saved simulation snapshot to: output_6.vtu
+[DEBUG] Entering time step: 1.4
+[INFO] Saved simulation snapshot to: output_7.vtu
+[DEBUG] Entering time step: 1.6
+[INFO] Saved simulation snapshot to: output_8.vtu
+[DEBUG] Entering time step: 1.8
+[INFO] Saved simulation snapshot to: output_9.vtu
+[DEBUG] Entering time step: 2
+[INFO] Saved simulation snapshot to: output_10.vtu
+[DEBUG] Entering time step: 2.2
+[INFO] Saved simulation snapshot to: output_11.vtu
+[DEBUG] Entering time step: 2.4
+[INFO] Saved simulation snapshot to: output_12.vtu
+[DEBUG] Entering time step: 2.6
+[INFO] Saved simulation snapshot to: output_13.vtu
+[DEBUG] Entering time step: 2.8
+[INFO] Saved simulation snapshot to: output_14.vtu
+[DEBUG] Entering time step: 3
+[INFO] Saved simulation snapshot to: output_15.vtu
+[DEBUG] Entering time step: 3.2
+[INFO] Saved simulation snapshot to: output_16.vtu
+[DEBUG] Entering time step: 3.4
+[INFO] Saved simulation snapshot to: output_17.vtu
+[DEBUG] Entering time step: 3.6
+[INFO] Saved simulation snapshot to: output_18.vtu
+[DEBUG] Entering time step: 3.8
+[INFO] Saved simulation snapshot to: output_19.vtu
+[DEBUG] Entering time step: 4
+[INFO] Saved simulation snapshot to: output_20.vtu
+[DEBUG] Entering time step: 4.2
+[INFO] Saved simulation snapshot to: output_21.vtu
+[DEBUG] Entering time step: 4.4
+[INFO] Saved simulation snapshot to: output_22.vtu
+[DEBUG] Entering time step: 4.6
+[INFO] Saved simulation snapshot to: output_23.vtu
+[DEBUG] Entering time step: 4.8
+[INFO] Saved simulation snapshot to: output_24.vtu
+[DEBUG] Entering time step: 5
+[INFO] Saved simulation snapshot to: output_25.vtu
+[DEBUG] Entering time step: 5.2
+[INFO] Saved simulation snapshot to: output_26.vtu
+[DEBUG] Entering time step: 5.4
+[INFO] Saved simulation snapshot to: output_27.vtu
+[DEBUG] Entering time step: 5.6
+[INFO] Saved simulation snapshot to: output_28.vtu
+[DEBUG] Entering time step: 5.8
+[INFO] Saved simulation snapshot to: output_29.vtu
+[DEBUG] Entering time step: 6
+[INFO] Saved simulation snapshot to: output_30.vtu
+[DEBUG] Entering time step: 6.2
+[INFO] Saved simulation snapshot to: output_31.vtu
+[DEBUG] Entering time step: 6.4
+[INFO] Saved simulation snapshot to: output_32.vtu
+[DEBUG] Entering time step: 6.6
+[INFO] Saved simulation snapshot to: output_33.vtu
+[DEBUG] Entering time step: 6.8
+[INFO] Saved simulation snapshot to: output_34.vtu
+[DEBUG] Entering time step: 7
+[INFO] Saved simulation snapshot to: output_35.vtu
+[DEBUG] Entering time step: 7.2
+[INFO] Saved simulation snapshot to: output_36.vtu
+[DEBUG] Entering time step: 7.4
+[INFO] Saved simulation snapshot to: output_37.vtu
+[DEBUG] Entering time step: 7.6
+[INFO] Saved simulation snapshot to: output_38.vtu
+[DEBUG] Entering time step: 7.8
+[INFO] Saved simulation snapshot to: output_39.vtu
+[DEBUG] Entering time step: 8
+[INFO] Saved simulation snapshot to: output_40.vtu
+[DEBUG] Entering time step: 8.2
+[INFO] Saved simulation snapshot to: output_41.vtu
+[DEBUG] Entering time step: 8.4
+[INFO] Saved simulation snapshot to: output_42.vtu
+[DEBUG] Entering time step: 8.6
+[INFO] Saved simulation snapshot to: output_43.vtu
+[DEBUG] Entering time step: 8.8
+[INFO] Saved simulation snapshot to: output_44.vtu
+[DEBUG] Entering time step: 9
+[INFO] Saved simulation snapshot to: output_45.vtu
+[DEBUG] Entering time step: 9.2
+[INFO] Saved simulation snapshot to: output_46.vtu
+[DEBUG] Entering time step: 9.4
+[INFO] Saved simulation snapshot to: output_47.vtu
+[DEBUG] Entering time step: 9.6
+[INFO] Saved simulation snapshot to: output_48.vtu
+[DEBUG] Entering time step: 9.8
+[INFO] Saved simulation snapshot to: output_49.vtu
+[DEBUG] Entering time step: 10
+[INFO] Saved simulation snapshot to: output_50.vtu
+
+Simulation Finished. Verifying Velocity Profile across Y-axis...
+Y-Coord	Velocity (Ux)
+-----------------------
+0	0.0014177
+1	0.00328124
+2	0.00401913
+3	0.00424641
+4	0.00429576
+5	0.00429578
+6	0.00424645
+7	0.00401914
+8	0.00328127
+9	0.00141775
+=== JOB_STATISTICS ===
+=== current date     : Sat Jun 27 17:43:52 CEST 2026
+= Job-ID             : 3789486 on alex
+= Job-Name           : bash_hpc.sh
+= Job-Command        : /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/bash_hpc.sh
+= Initial workdir    : /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project
+= Queue/Partition    : a40
+= Slurm account      : hesp with QOS=normal
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:00:13
+= Total RAM usage    : 0.4 GiB of assigned  GiB (%)
+= Node list          : a1722
+= Subm/Elig/Start/End: 2026-06-27T17:43:37 / 2026-06-27T17:43:37 / 2026-06-27T17:43:39 / 2026-06-27T17:43:52
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc            1928.9M   104.9G   209.7G        N/A   5,380      500K   1,000K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]

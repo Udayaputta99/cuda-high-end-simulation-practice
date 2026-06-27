@@ -47,15 +47,15 @@ inline int get_idx(int x, int y, int z, const int i) {
 }
 
 bool is_inside_box(int x, int y, int z){
-    box_xmin = (int)Nx*0.06
-    box_ymin = (int)Ny*0.06
-    box_zmin = (int)Nz*0.06
-    box_xmax = (int)Nx*0.07
-    box_ymax = (int)Ny*0.07
-    box_zmax = (int)Nz*0.07
+    int box_xmin = (int)Nx*0.06;
+    int box_ymin = (int)Ny*0.06;
+    int box_zmin = (int)Nz*0.06;
+    int box_xmax = (int)Nx*0.07;
+    int box_ymax = (int)Ny*0.07;
+    int box_zmax = (int)Nz*0.07;
     if (x >= box_xmin && x <= box_xmax &&
         y >= box_ymin && y <= box_ymax &&
-        z >= box_zmin && z <= box_zmax &&){
+        z >= box_zmin && z <= box_zmax){
             return true;
         }
     else return false;
@@ -107,11 +107,13 @@ int main() {
                         int src_z = (z - cz[i] + Nz) % Nz; // Periodic boundary on Z
                         
                         //check for box
+                        bool isInsideBox = is_inside_box(src_x,src_y,src_z);
                         //check for domain
+                        bool isOutsideDomain = (src_y<0 || src_y >= Ny)?true:false;
                         //if (not true for box and domain)Pull from neighbor
                         //else
                         
-                        if (src_y < 0 || src_y >= Ny) {
+                        if (isInsideBox || isOutsideDomain) {
                             f_local[i] = f_old[get_idx(x, y, z, inv[i])]; // Bounce-back from self
                         } else {
                             f_local[i] = f_old[get_idx(src_x, src_y, src_z, i)]; // Pull from neighbor
@@ -144,7 +146,7 @@ int main() {
         std::swap(f_old, f_new);
         // Inside main time loop, or right after the loop finishes:
 
-        if (step % 100 == 0){
+        if (step % 1 == 0){
             std::string filename = "output_" + std::to_string(step) + ".vtu";
             write_vtu(filename, f_old, Nx, Ny, Nz);
         }
