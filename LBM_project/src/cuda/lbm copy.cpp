@@ -44,21 +44,6 @@ inline int get_idx(int x, int y, int z, const int i) {
     return i * volume + (z * Nx * Ny + y * Nx + x);
 }
 
-bool is_inside_box(int x, int y, int z){
-    box_xmin = (int)Nx*0.06
-    box_ymin = (int)Ny*0.06
-    box_zmin = (int)Nz*0.06
-    box_xmax = (int)Nx*0.07
-    box_ymax = (int)Ny*0.07
-    box_zmax = (int)Nz*0.07
-    if (x >= box_xmin && x <= box_xmax &&
-        y >= box_ymin && y <= box_ymax &&
-        z >= box_zmin && z <= box_zmax &&){
-            return true;
-        }
-    else return true;
-}
-
 int main() {
     std::cout<<"Allocating the memory\n"<< std::endl;
 

@@ -1,0 +1,136 @@
+### Starting TaskPrologue of job 3789348 on a0222 at Sat Jun 27 05:02:30 PM CEST 2026
+Running on cores 0-15 with governor ondemand
+Sat Jun 27 17:02:30 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:01:00.0 Off |                  Off |
+|  0%   35C    P8             21W /  300W |       0MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+-- The CXX compiler identification is NVHPC 26.3.0
+-- The CUDA compiler identification is NVIDIA 13.1.115 with host compiler GNU 11.5.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvc++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Configuring done (5.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build
+[ 50%] Building CXX object CMakeFiles/lbm.dir/src/lbm.cpp.o
+[100%] Linking CXX executable lbm
+[100%] Built target lbm
+Allocating the memory
+
+Initialize the flow
+
+Start the time iteration loop
+
+[DEBUG] Entering time step: 0
+rho mid: 1
+Step: 0 | Centerline Velocity Ux: 0.000133338
+[DEBUG] Entering time step: 0.2
+[DEBUG] Entering time step: 0.4
+[DEBUG] Entering time step: 0.6
+[DEBUG] Entering time step: 0.8
+[DEBUG] Entering time step: 1
+[DEBUG] Entering time step: 1.2
+[DEBUG] Entering time step: 1.4
+[DEBUG] Entering time step: 1.6
+[DEBUG] Entering time step: 1.8
+[DEBUG] Entering time step: 2
+[DEBUG] Entering time step: 2.2
+[DEBUG] Entering time step: 2.4
+[DEBUG] Entering time step: 2.6
+[DEBUG] Entering time step: 2.8
+[DEBUG] Entering time step: 3
+[DEBUG] Entering time step: 3.2
+[DEBUG] Entering time step: 3.4
+[DEBUG] Entering time step: 3.6
+[DEBUG] Entering time step: 3.8
+[DEBUG] Entering time step: 4
+[DEBUG] Entering time step: 4.2
+[DEBUG] Entering time step: 4.4
+[DEBUG] Entering time step: 4.6
+[DEBUG] Entering time step: 4.8
+[DEBUG] Entering time step: 5
+[DEBUG] Entering time step: 5.2
+[DEBUG] Entering time step: 5.4
+[DEBUG] Entering time step: 5.6
+[DEBUG] Entering time step: 5.8
+[DEBUG] Entering time step: 6
+[DEBUG] Entering time step: 6.2
+[DEBUG] Entering time step: 6.4
+[DEBUG] Entering time step: 6.6
+[DEBUG] Entering time step: 6.8
+[DEBUG] Entering time step: 7
+[DEBUG] Entering time step: 7.2
+[DEBUG] Entering time step: 7.4
+[DEBUG] Entering time step: 7.6
+[DEBUG] Entering time step: 7.8
+[DEBUG] Entering time step: 8
+[DEBUG] Entering time step: 8.2
+[DEBUG] Entering time step: 8.4
+[DEBUG] Entering time step: 8.6
+[DEBUG] Entering time step: 8.8
+[DEBUG] Entering time step: 9
+[DEBUG] Entering time step: 9.2
+[DEBUG] Entering time step: 9.4
+[DEBUG] Entering time step: 9.6
+[DEBUG] Entering time step: 9.8
+[DEBUG] Entering time step: 10
+
+Simulation Finished. Verifying Velocity Profile across Y-axis...
+Y-Coord	Velocity (Ux)
+-----------------------
+0	0.00141771
+1	0.00328123
+2	0.0040191
+3	0.00424637
+4	0.00429571
+5	0.00429571
+6	0.00424637
+7	0.00401911
+8	0.00328123
+9	0.00141772
+=== JOB_STATISTICS ===
+=== current date     : Sat Jun 27 17:02:39 CEST 2026
+= Job-ID             : 3789348 on alex
+= Job-Name           : bash_hpc.sh
+= Job-Command        : /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/bash_hpc.sh
+= Initial workdir    : /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project
+= Queue/Partition    : a40
+= Slurm account      : hesp with QOS=normal
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:00:11
+= Total RAM usage    : 0.4 GiB of assigned  GiB (%)
+= Node list          : a0222
+= Subm/Elig/Start/End: 2026-06-27T17:02:27 / 2026-06-27T17:02:27 / 2026-06-27T17:02:28 / 2026-06-27T17:02:39
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc            4726.0M   104.9G   209.7G        N/A  15,474      500K   1,000K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]

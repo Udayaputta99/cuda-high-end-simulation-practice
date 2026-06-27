@@ -31,6 +31,7 @@ const double w[19] = {
 const int cx[19] = { 0,  1, -1,  0,  0,  0,  0,  1, -1,  1, -1,  1, -1,  1, -1,  0,  0,  0,  0 };
 const int cy[19] = { 0,  0,  0,  1, -1,  0,  0,  1,  1, -1, -1,  0,  0,  0,  0,  1, -1,  1, -1 };
 const int cz[19] = { 0,  0,  0,  0,  0,  1, -1,  0,  0,  0,  0,  1,  1, -1, -1,  1,  1, -1, -1 };
+
 const int inv[19] = {0, 2, 1, 4, 3, 6, 5, 10, 9, 8, 7, 14, 13, 12, 11, 18, 17, 16, 15};
 
 double get_f_eq(const double rho, const int i, double ux, double uy, double uz){
@@ -39,9 +40,25 @@ double get_f_eq(const double rho, const int i, double ux, double uy, double uz){
     double f_eq = w[i] * rho * (1.0f + 3.0f*cu + 4.5f*cu*cu - 1.5f*u_sq);
     return f_eq;
 }
+
 // SoA indexing:
 inline int get_idx(int x, int y, int z, const int i) {
     return i * volume + (z * Nx * Ny + y * Nx + x);
+}
+
+bool is_inside_box(int x, int y, int z){
+    box_xmin = (int)Nx*0.06
+    box_ymin = (int)Ny*0.06
+    box_zmin = (int)Nz*0.06
+    box_xmax = (int)Nx*0.07
+    box_ymax = (int)Ny*0.07
+    box_zmax = (int)Nz*0.07
+    if (x >= box_xmin && x <= box_xmax &&
+        y >= box_ymin && y <= box_ymax &&
+        z >= box_zmin && z <= box_zmax &&){
+            return true;
+        }
+    else return false;
 }
 
 int main() {
@@ -88,16 +105,17 @@ int main() {
                         int src_x = (x - cx[i] + Nx) % Nx; // Periodic boundary on X
                         int src_y = y - cy[i];
                         int src_z = (z - cz[i] + Nz) % Nz; // Periodic boundary on Z
+                        
+                        //check for box
+                        //check for domain
+                        //if (not true for box and domain)Pull from neighbor
+                        //else
+                        
                         if (src_y < 0 || src_y >= Ny) {
                             f_local[i] = f_old[get_idx(x, y, z, inv[i])]; // Bounce-back from self
                         } else {
                             f_local[i] = f_old[get_idx(src_x, src_y, src_z, i)]; // Pull from neighbor
                         }
-                        // if (std::isnan(f_local[i])) {
-                        //     std::cout << "[DEBUG] f_local[" << i << "] is NaN at ("
-                        //             << x << "," << y << "," << z << ") src=("
-                        //             << src_x << "," << src_y << "," << src_z << ")\n";
-                        // }
 
                     }
 
@@ -126,8 +144,10 @@ int main() {
         std::swap(f_old, f_new);
         // Inside main time loop, or right after the loop finishes:
 
-        std::string filename = "output_" + std::to_string(step) + ".vtu";
-        write_vtu(filename, f_old, Nx, Ny, Nz);
+        if (step % 100 == 0){
+            std::string filename = "output_" + std::to_string(step) + ".vtu";
+            write_vtu(filename, f_old, Nx, Ny, Nz);
+        }
 
         // Progress Print tracking centerline velocity evolution
         if (fmod(time, 500.0) < 1e-12) {

@@ -19,5 +19,4 @@ make
 mkdir VTU_files
 mv *.vtu VTU_files/
 cd VTU_files/
-touch foam.foam
 
