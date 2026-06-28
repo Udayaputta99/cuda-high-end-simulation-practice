@@ -1,193 +1,137 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <algorithm>
 #include <fstream>
-#include "writeVTU.h"
+#include <sstream>
+#include <iomanip>
+#include <string>
+#include <utility>
+#include <cstdlib>
+#include "write_vti.h"
+#include "domain.h"
+#include "functions.h"
 
-
-double tau = 0.6f;          // Relaxation time (controls viscosity)
-double F_x = 0.0001f;      // Driving body force in X direction
-
-// const int dimension = 3;
-
-const int Nx = 100;
-const int Ny = 10;
-const int Nz = 40;
-const int speeds = 19;
-const int volume = Nx * Ny * Nz;
-double startTime = 0.0;
-double endTime = 10.0;
-double deltaT = 0.2;
-
-const double w[19] = {
-    1.0f/3.0f,                                                              // i=0
-    1.0f/18.0f, 1.0f/18.0f, 1.0f/18.0f, 1.0f/18.0f, 1.0f/18.0f, 1.0f/18.0f, // i=1..6
-    1.0f/36.0f, 1.0f/36.0f, 1.0f/36.0f, 1.0f/36.0f,                         // i=7..10
-    1.0f/36.0f, 1.0f/36.0f, 1.0f/36.0f, 1.0f/36.0f,                         // i=11..14
-    1.0f/36.0f, 1.0f/36.0f, 1.0f/36.0f, 1.0f/36.0f                          // i=15..18
-};
-
-const int cx[19] = { 0,  1, -1,  0,  0,  0,  0,  1, -1,  1, -1,  1, -1,  1, -1,  0,  0,  0,  0 };
-const int cy[19] = { 0,  0,  0,  1, -1,  0,  0,  1,  1, -1, -1,  0,  0,  0,  0,  1, -1,  1, -1 };
-const int cz[19] = { 0,  0,  0,  0,  0,  1, -1,  0,  0,  0,  0,  1,  1, -1, -1,  1,  1, -1, -1 };
-
-const int inv[19] = {0, 2, 1, 4, 3, 6, 5, 10, 9, 8, 7, 14, 13, 12, 11, 18, 17, 16, 15};
-
-double get_f_eq(const double rho, const int i, double ux, double uy, double uz){
-    double cu = cx[i]*ux + cy[i]*uy + cz[i]*uz;
-    double u_sq = ux*ux + uy*uy + uz*uz;
-    double f_eq = w[i] * rho * (1.0f + 3.0f*cu + 4.5f*cu*cu - 1.5f*u_sq);
-    return f_eq;
-}
-
-// SoA indexing:
-inline int get_idx(int x, int y, int z, const int i) {
-    return i * volume + (z * Nx * Ny + y * Nx + x);
-}
-
-bool is_inside_box(int x, int y, int z){
-    int box_xmin = (int)Nx*0.06;
-    int box_ymin = (int)Ny*0.06;
-    int box_zmin = (int)Nz*0.06;
-    int box_xmax = (int)Nx*0.07;
-    int box_ymax = (int)Ny*0.07;
-    int box_zmax = (int)Nz*0.07;
-    if (x >= box_xmin && x <= box_xmax &&
-        y >= box_ymin && y <= box_ymax &&
-        z >= box_zmin && z <= box_zmax){
-            return true;
-        }
-    else return false;
-}
+// ======================================================================
+//  D3Q19 Lattice Boltzmann - channel flow with a rectangular obstacle
+//  Periodic in X (streamwise) and Z (spanwise), bounce-back walls at
+//  Y = 0 and Y = domain.Ny-1.
+// ======================================================================
 
 int main() {
-    std::cout<<"Allocating the memory\n"<< std::endl;
+    Domain domain;
+    force_cal(domain);
+    std::cout << "Allocating memory...\n";
+    std::vector<double> f_old(domain.Q * domain.volume, 0.0);
+    std::vector<double> f_new(domain.Q * domain.volume, 0.0);
 
-    std::vector<float> f_old(speeds * volume, 0.0f);
-    std::vector<float> f_new(speeds * volume, 0.0f);
-
-    std::cout<<"Initialize the flow\n"<< std::endl;
-
-    for(int z = 0; z<Nz; ++z){
-        for(int y = 0; y<Ny; ++y){
-            for(int x = 0; x<Nx; ++x){
-
-                float rho_init = 1.0f;
-                double ux_init = 0;
-                double uy_init = 0;
-                double uz_init = 0;
-                for(int i = 0; i<speeds; ++i){
-                    double feq_val = get_f_eq(rho_init, i, ux_init, uy_init, uz_init);
-                    f_old[get_idx(x, y, z, i)] = feq_val;
-                    f_new[get_idx(x, y, z, i)] = feq_val;
+    std::cout << "Initializing flow field (rho = 1, u = 0)...\n";
+    for (int z = 0; z < domain.Nz; ++z)
+        for (int y = 0; y < domain.Ny; ++y)
+            for (int x = 0; x < domain.Nx; ++x)
+                for (int i = 0; i < domain.Q; ++i) {
+                    double feq = get_f_eq(domain, 1.0, i, 0.0, 0.0, 0.0);
+                    f_old[get_idx(domain,x,y,z,i)] = feq;
+                    f_new[get_idx(domain,x,y,z,i)] = feq;
                 }
-            }
-        }
-    }
 
-    std::cout<<"Start the time iteration loop\n"<< std::endl;
+    system(("mkdir -p " + domain.outDir).c_str());
+    std::vector<std::pair<int,std::string>> pvdEntries;
 
-    int step =0;
+    std::cout << "Starting time loop (" << domain.nSteps << " steps)...\n";
 
-    for(double time = startTime; time<=endTime; time += deltaT, step++){
+    for (int step = 0; step <= domain.nSteps; ++step) {
 
-        std::cout << "[DEBUG] Entering time step: " << time << std::endl;
-        
-        for (int z = 0; z < Nz; ++z) {
-            for (int y = 0; y < Ny; ++y) {
-                for (int x = 0; x < Nx; ++x) {
+        for (int z = 0; z < domain.Nz; ++z) {
+            for (int y = 0; y < domain.Ny; ++y) {
+                for (int x = 0; x < domain.Nx; ++x) {
 
-                    double f_local[speeds];
+                    double f_local[domain.Q];
 
-                    for (int i = 0; i < speeds; ++i) {
-                        // Subtract vector direction to look backward to source
-                        int src_x = (x - cx[i] + Nx) % Nx; // Periodic boundary on X
-                        int src_y = y - cy[i];
-                        int src_z = (z - cz[i] + Nz) % Nz; // Periodic boundary on Z
-                        
-                        //check for box
-                        bool isInsideBox = is_inside_box(src_x,src_y,src_z);
-                        //check for domain
-                        bool isOutsideDomain = (src_y<0 || src_y >= Ny)?true:false;
-                        //if (not true for box and domain)Pull from neighbor
-                        //else
-                        
-                        if (isInsideBox || isOutsideDomain) {
-                            f_local[i] = f_old[get_idx(x, y, z, inv[i])]; // Bounce-back from self
+                    for (int i = 0; i < domain.Q; ++i) {
+                        int src_x = (x - domain.cx[i] + domain.Nx) % domain.Nx;   // periodic in X
+                        int src_y = y - domain.cy[i];
+                        int src_z = (z - domain.cz[i] + domain.Nz) % domain.Nz;   // periodic in Z
+
+                        bool insideBox     = is_inside_box(domain, src_x, src_y, src_z);
+                        bool outsideDomain = (src_y < 0 || src_y >= domain.Ny);
+
+                        if (insideBox || outsideDomain) {
+                            // full-way bounce-back: f_old here holds the
+                            // post-collision (pre-stream) state from last
+                            // step, so this correctly reflects momentum.
+                            f_local[i] = f_old[get_idx(domain, x, y, z, domain.inv[i])];
                         } else {
-                            f_local[i] = f_old[get_idx(src_x, src_y, src_z, i)]; // Pull from neighbor
+                            f_local[i] = f_old[get_idx(domain, src_x, src_y, src_z, i)];
                         }
-
                     }
 
-                    // Collision step
-                    float rho = 0.0f;
-                    float ux = 0.0f, uy = 0.0f, uz = 0.0f;
-                    for (int i = 0; i < speeds; ++i) {
-                        rho += f_local[i];                      // 𝜌 = Σ f_i
-                        ux  += f_local[i] * cx[i];       //𝜌*𝑢𝛼  = Σ f_i cx[i]--> this is momentum, not velocity
-                        uy  += f_local[i] * cy[i];
-                        uz  += f_local[i] * cz[i];
+                    if (is_inside_box(domain, x, y, z)) {
+                        for (int i = 0; i < domain.Q; ++i)
+                            f_new[get_idx(domain, x, y, z, i)] = get_f_eq(domain, 1.0, i, 0.0, 0.0, 0.0);
+                        continue;
                     }
-                    ux /= rho; uy /= rho; uz /= rho;            //𝑢𝛼  = (Σ f_i cx[i])/𝜌
 
-                    // inject driving force
-                    ux += (F_x / (2.0f * rho));
+                    double rho=0.0, ux=0.0, uy=0.0, uz=0.0;
+                    for (int i = 0; i < domain.Q; ++i) {
+                        rho += f_local[i];
+                        ux  += f_local[i]*domain.cx[i];
+                        uy  += f_local[i]*domain.cy[i];
+                        uz  += f_local[i]*domain.cz[i];
+                    }
+                    ux /= rho; uy /= rho; uz /= rho;
+                    ux += domain.F_x / (2.0 * rho);   // Guo-style half-force velocity shift
 
-                    for (int i = 0; i < speeds; ++i) {
-                        float feq_val = get_f_eq(rho, i, ux, uy, uz);
-                        // BGK relaxation calculation written directly to f_new
-                        f_new[get_idx(x, y, z, i)] = f_local[i] - (1.0f / tau) * (f_local[i] - feq_val);
+                    for (int i = 0; i < domain.Q; ++i) {
+                        double feq = get_f_eq(domain, rho, i, ux, uy, uz);
+                        f_new[get_idx(domain, x, y, z, i)] = f_local[i] - (f_local[i] - feq) / domain.tau;
                     }
                 }
             }
         }
+
         std::swap(f_old, f_new);
-        // Inside main time loop, or right after the loop finishes:
 
-        if (step % 1 == 0){
-            std::string filename = "output_" + std::to_string(step) + ".vtu";
-            write_vtu(filename, f_old, Nx, Ny, Nz);
-        }
-
-        // Progress Print tracking centerline velocity evolution
-        if (fmod(time, 500.0) < 1e-12) {
-            // Sampling a node in the middle of the channel
-            int mid_x = Nx / 2; int mid_y = Ny / 2; int mid_z = Nz / 2;
-            double rho_mid = 0; float ux_mid = 0;
-            for (int i = 0; i < speeds; ++i) {
-                double f_val = f_old[get_idx(mid_x, mid_y, mid_z, i)];
-                rho_mid += f_val;
-                ux_mid  += f_val * cx[i];
+        if (step % domain.monitorEvery == 0) {
+            int mx = domain.Nx/2, my = domain.Ny/2, mz = domain.Nz/2;
+            double rho=0.0, ux=0.0;
+            for (int i = 0; i < domain.Q; ++i) {
+                double fv = f_old[get_idx(domain, mx,my,mz,i)];
+                rho += fv; ux += fv*domain.cx[i];
             }
-            std::cout<<"rho mid: "<<rho_mid<<std::endl;
-            ux_mid = (ux_mid / rho_mid) + (F_x / (2.0f * rho_mid));
-            std::cout << "Step: " << time << " | Centerline Velocity Ux: " << ux_mid << std::endl;
+            ux = ux/rho + domain.F_x/(2.0*rho);
+            std::cout << "step " << step << "  rho_mid=" << rho << "  ux_mid=" << ux << "\n";
+        }
+
+        if (step % domain.outputEvery == 0) {
+            std::ostringstream fn;
+            fn << domain.outDir << "/channel_" << std::setw(5) << std::setfill('0') << step << ".vti";
+            write_vti(fn.str(), f_old, domain);
+            
+            std::ostringstream pvdname;
+            pvdname << "channel_" << std::setw(5) << std::setfill('0') << step << ".vti";
+            pvdEntries.push_back({step, pvdname.str()});
         }
     }
 
-    // POST-PROCESSING & VERIFICATION
-    std::cout << "\nSimulation Finished. Verifying Velocity Profile across Y-axis...\n";
-    std::cout << "Y-Coord\tVelocity (Ux)\n";
-    std::cout << "-----------------------\n";
-    
-    int sample_x = Nx / 2;
-    int sample_z = Nz / 2;
+    write_pvd(domain.outDir + "/channel.pvd", pvdEntries);
 
-    for (int y = 0; y < Ny; ++y) {
-        float rho = 0.0f;
-        float ux = 0.0f;
-        for (int i = 0; i < speeds; ++i) {
-            float f_val = f_old[get_idx(sample_x, y, sample_z, i)];
-            rho += f_val;
-            ux  += f_val * cx[i];
+    std::cout << "\nFinal velocity profile (Ux) across Y at mid X,Z:\n";
+    std::cout << "Y\tUx\n--------------------\n";
+    int sx = domain.Nx/2, sz = domain.Nz/2;
+    for (int y = 0; y < domain.Ny; ++y) {
+        if (is_inside_box(domain, sx, y, sz)) {
+            std::cout << y << "\t(solid)\n";
+            continue;
         }
-        ux = (ux / rho) + (F_x / (2.0f * rho));
-        
-        std::cout << y << "\t" << ux << std::endl;
+        double rho=0.0, ux=0.0;
+        for (int i = 0; i < domain.Q; ++i) {
+            double fv = f_old[get_idx(domain,sx,y,sz,i)];
+            rho += fv; ux += fv*domain.cx[i];
+        }
+        ux = ux/rho + domain.F_x/(2.0*rho);
+        std::cout << y << "\t" << ux << "\n";
     }
 
+    std::cout << "\nDone. Open " << domain.outDir << "/channel.pvd in ParaView.\n";
     return 0;
-
 }

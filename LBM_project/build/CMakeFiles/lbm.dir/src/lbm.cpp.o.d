@@ -1,5 +1,5 @@
 CMakeFiles/lbm.dir/src/lbm.cpp.o : \
-  /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/src/lbm.cpp \
+  /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/src/lbm.cpp \
   /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/_cplus_macros.h \
   /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/_cplus_preinclude.h \
   /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/iostream \
@@ -275,20 +275,6 @@ CMakeFiles/lbm.dir/src/lbm.cpp.o : \
   /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/tr1/poly_laguerre.tcc \
   /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/tr1/riemann_zeta.tcc \
   /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/tr1/special_function_util.h \
-  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/algorithm \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/algorithm \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/utility \
-  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/stl_relops.h \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/ranges_algo.h \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/ranges_algobase.h \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/iterator \
-  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/stream_iterator.h \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/invoke.h \
-  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/ranges_util.h \
-  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/pstl/glue_algorithm_defs.h \
-  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/nvhpc/pstl_config.hpp \
   /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/fstream \
   /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/codecvt.h \
   /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
@@ -302,4 +288,30 @@ CMakeFiles/lbm.dir/src/lbm.cpp.o : \
   /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/fstream.tcc \
   /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/cerrno \
   /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
-  /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/src/writeVTU.h 
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/sstream \
+  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/alloc_traits.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/sstream.tcc \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/iomanip \
+  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/locale \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/locale_facets_nonio.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/ctime \
+  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux/bits/time_members.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/locale_conv.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/unique_ptr.h \
+  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/utility \
+  /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/none-none/nvhpc-26.3-tkbxqsc7xs7r34eg5kwfkv6av67x36p2/Linux_x86_64/26.3/compilers/include/bits/c++config.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/stl_relops.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/tuple \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/array \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/uses_allocator.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/invoke.h \
+  /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/bits/quoted_string.h \
+  /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/src/write_vti.h \
+  /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/src/domain.h \
+  /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/src/functions.h 

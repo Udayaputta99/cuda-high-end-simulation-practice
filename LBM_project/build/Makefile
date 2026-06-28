@@ -57,10 +57,10 @@ RM = /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/gcc-11.5.0/cmake-3.3
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project
+CMAKE_SOURCE_DIR = /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build
+CMAKE_BINARY_DIR = /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

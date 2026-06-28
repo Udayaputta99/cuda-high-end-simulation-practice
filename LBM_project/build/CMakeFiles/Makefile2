@@ -54,10 +54,10 @@ RM = /apps/SPACK/1.1.1-alex/opt/spack/linux-almalinux9-zen3/gcc-11.5.0/cmake-3.3
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project
+CMAKE_SOURCE_DIR = /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build
+CMAKE_BINARY_DIR = /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -85,14 +85,14 @@ clean: CMakeFiles/lbm.dir/clean
 CMakeFiles/lbm.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm.dir/build.make CMakeFiles/lbm.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm.dir/build.make CMakeFiles/lbm.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles --progress-num=1,2 "Built target lbm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles --progress-num=1,2 "Built target lbm"
 .PHONY : CMakeFiles/lbm.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/lbm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/lbm.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles 0
 .PHONY : CMakeFiles/lbm.dir/rule
 
 # Convenience name for target.
@@ -102,7 +102,7 @@ lbm: CMakeFiles/lbm.dir/rule
 # codegen rule for target.
 CMakeFiles/lbm.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm.dir/build.make CMakeFiles/lbm.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hpc/hesp/hesp170v/udayrepo/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles --progress-num=1,2 "Finished codegen for target lbm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hpc/hesp/hesp132v/cuda/cuda-high-end-simulation-practice/LBM_project/build/CMakeFiles --progress-num=1,2 "Finished codegen for target lbm"
 .PHONY : CMakeFiles/lbm.dir/codegen
 
 # clean rule for target.

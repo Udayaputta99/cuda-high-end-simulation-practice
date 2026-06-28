@@ -1,7 +1,7 @@
 #!/bin/bash -l
-#
+
 #SBATCH --gres=gpu:a40:1
-#SBATCH --time=01:00:00
+#SBATCH --time=05:00:00
 #SBATCH --export=NONE
 
 unset SLURM_EXPORT_ENV
@@ -16,7 +16,5 @@ make
 
 ./lbm
 
-mkdir VTU_files
-mv *.vtu VTU_files/
-cd VTU_files/
-
+mkdir vti_files
+mv *.vti vti_files/
