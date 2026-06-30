@@ -3,9 +3,12 @@
 
 struct Domain{
     // ---- Physical / numerical parameters --------------------------------
-    const double tau = 0.53;      // relaxation time -> nu = (tau-0.5)/3
+    // const double tau = 0.53;      // relaxation time -> nu = (tau-0.5)/3
     const int target_Re = 48;
-    double F_x;            // streamwise body force driving the flow
+    // double F_x;            // streamwise body force driving the flow
+
+    const double tau = 0.6;     // relaxation time -> nu = (tau-0.5)/3
+    const double F_x = 0.0001;  // streamwise body force driving the flow
 
     // ---- Domain size --------------------------------------------------------
     const int Nx = 100;

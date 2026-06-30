@@ -19,7 +19,7 @@
 
 int main() {
     Domain domain;
-    force_cal(domain);
+    // force_cal(domain);
     std::cout << "Allocating memory...\n";
     std::vector<double> f_old(domain.Q * domain.volume, 0.0);
     std::vector<double> f_new(domain.Q * domain.volume, 0.0);

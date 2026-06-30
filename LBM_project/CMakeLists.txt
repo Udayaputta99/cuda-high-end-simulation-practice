@@ -9,7 +9,7 @@ set(CMAKE_CUDA_ARCHITECTURES 86)
 
 # Add all files to the executable target
 add_executable(lbm
-    src/lbm.cpp
+    src/lbm2.cpp
 )
 
 # Tell the host compiler (g++) to use -march=native
